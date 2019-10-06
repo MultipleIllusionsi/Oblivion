@@ -1,7 +1,12 @@
 ## Oblivion - clothing shop
 
-####Stack
+#### Stack
 
 - HTML5
 - SASS
 - React
+- Redux
+  - Redux-persist
+  - Redux-saga
+- Firebase
+- Stripe
