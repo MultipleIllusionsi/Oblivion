@@ -10,7 +10,7 @@ import ShopPage from "./pages/shop/shop";
 import Registration from "./pages/registration/registration";
 import CheckoutPage from "./pages/checkout/checkout";
 
-import Header from "./components/header/header";
+import { default as Header } from "./components/header/header.container";
 
 import {
   auth,
