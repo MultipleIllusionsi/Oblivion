@@ -24,7 +24,6 @@ const CollectionsOverviewContainer = () => (
   <Query query={GET_COLLECTIONS}>
     {/* give a func */}
     {({ loading, error, data }) => {
-      console.log("data", data);
       if (loading) return <Spinner />;
       if (error) console.log(error);
       return <CollectionsOverview collections={data.collections} />;
