@@ -31,7 +31,9 @@ const client = new ApolloClient({
 
 client.writeData({
   data: {
-    cartHidden: true
+    cartHidden: true,
+    cartItems: [],
+    itemCount: 0
   }
 });
 
@@ -52,7 +54,7 @@ client
       }
     `
   })
-  .then(res => console.log(res))
+  .then(res => res)
   .catch(err => console.log(err));
 
 ReactDOM.render(
