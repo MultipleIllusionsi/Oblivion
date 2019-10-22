@@ -8,7 +8,6 @@ import "./App.scss";
 import Header from "./components/header/header";
 import Spinner from "./components/spinner/spinner";
 import ErrorBoundary from "./components/error-boundary/error-boundary";
-import Error404 from "./components/error-boundary/error404";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
@@ -26,7 +25,7 @@ const App = ({ checkUserSession, currentUser }) => {
   }, [checkUserSession]);
 
   return (
-    <div>
+    <>
       <Header />
       <Switch>
         <ErrorBoundary>
@@ -41,11 +40,10 @@ const App = ({ checkUserSession, currentUser }) => {
                 currentUser ? <Redirect to="/" /> : <Registration />
               }
             />
-            <Route path="*" component={Error404} />
           </Suspense>
         </ErrorBoundary>
       </Switch>
-    </div>
+    </>
   );
 };
 
