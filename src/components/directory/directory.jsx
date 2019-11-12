@@ -9,15 +9,15 @@ import MenuItem from "../menu-item/menu-item";
 import "./directory.scss";
 
 const Directory = ({ sections }) => (
-  <div className="directory-menu">
+  <ul className="directory-menu">
     {sections.map(({ id, ...otherSectionProps }) => (
       <MenuItem key={id} {...otherSectionProps} />
     ))}
-  </div>
+  </ul>
 );
 
 const mapStateToProps = createStructuredSelector({
-  sections: selectDirectorySections
+  sections: selectDirectorySections,
 });
 
 export default connect(mapStateToProps)(Directory);

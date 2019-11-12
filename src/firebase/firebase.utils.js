@@ -9,7 +9,7 @@ const config = {
   projectId: "oblivion-shop",
   storageBucket: "",
   messagingSenderId: "172060948129",
-  appId: "1:172060948129:web:26c3b602c50b961c30a2e0"
+  appId: "1:172060948129:web:26c3b602c50b961c30a2e0",
 };
 
 firebase.initializeApp(config);
@@ -25,10 +25,7 @@ export const createUserProfileDocument = async (
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
-    const {
-      displayName,
-      email
-    } = userAuth;
+    const { displayName, email } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -36,7 +33,7 @@ export const createUserProfileDocument = async (
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (err) {
       console.log("error creating user", err.message);
@@ -46,6 +43,7 @@ export const createUserProfileDocument = async (
   return userRef;
 };
 
+// one-time func for adding info in db
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd
@@ -62,41 +60,47 @@ export const addCollectionAndDocuments = async (
 };
 
 export const convertCollectionsSnapshotToMap = collections => {
-  const transformedCollection = collections.docs.map(doc => {
-    const {
-      title,
-      items
-    } = doc.data();
+  const transformedCollection = collections.docs.map(
+    doc => {
+      const { title, items } = doc.data();
 
-    return {
-      routeName: encodeURI(title.toLowerCase()),
-      id: doc.id,
-      title,
-      items
-    };
-  });
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items,
+      };
+    }
+  );
 
-  return transformedCollection.reduce((accumulator, collection) => {
-    accumulator[collection.title.toLowerCase()] = collection;
-    return accumulator;
-  }, {});
+  return transformedCollection.reduce(
+    (accumulator, collection) => {
+      accumulator[
+        collection.title.toLowerCase()
+      ] = collection;
+      return accumulator;
+    },
+    {}
+  );
 };
 
-export const getCurrentUser = () => {
-  return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged(userAuth => {
-      unsubscribe();
-      resolve(userAuth);
-    }, reject);
+export const getCurrentUser = () =>
+  new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(
+      userAuth => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
   });
-};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({
-  prompt: "select_account"
+  prompt: "select_account",
 });
 export const signInWithGoogle = () =>
   auth.signInWithPopup(googleProvider);

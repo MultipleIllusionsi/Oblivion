@@ -3,20 +3,16 @@ import React, { Component } from "react";
 import Error404 from "./error404";
 
 class ErrorBoundary extends Component {
-  constructor() {
-    super();
+  state = {
+    hasErrored: false,
+  };
 
-    this.state = {
-      hasErrored: false
-    };
-  }
-
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     // process the error
     return { hasErrored: true };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error, _info) {
     console.log(error);
   }
 

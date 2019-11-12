@@ -5,12 +5,11 @@ import Spinner from "../spinner/spinner";
 const WithSpinner = WrappedComponent => ({
   isLoading,
   ...otherProps
-}) => {
-  return isLoading ? (
+}) =>
+  isLoading ? (
     <Spinner />
   ) : (
     <WrappedComponent {...otherProps} />
   );
-};
 
 export default WithSpinner;
