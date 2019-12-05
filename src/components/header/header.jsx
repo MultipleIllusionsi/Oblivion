@@ -25,18 +25,17 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
           SHOP
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link className="option" to="/shop">
           CONTACT
         </Link>
-      </li>
+      </li> */}
       {currentUser ? (
         <div className="option" onClick={signOutStart}>
           SIGN OUT
         </div>
       ) : (
         <li>
-          {" "}
           <Link className="option" to="/signin">
             SIGN IN
           </Link>
